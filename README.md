@@ -8,7 +8,7 @@ var async = require('async');
 var require('async-if-else').extend(async);
 
 async.waterfall([
-  async.constant({email: 'thiago@email.com', password: 'secret'}),
+  async.constant({email: 'thiago@email.com', dogs: 2, money: 0, fun: 100 }),
   async.if(existOnDatabase, updateAccount).else(tryToImportFromLegacy)
 ], handler);
 
