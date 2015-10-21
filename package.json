@@ -1,0 +1,15 @@
+{
+  "name": "async-if",
+  "version": "0.0.1",
+  "description": "'conditional if to async control flow'",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "author": "tdantas",
+  "license": "ISC",
+  "devDependencies": {
+    "async": "^1.4.2",
+    "tape": "^4.2.2"
+  }
+}
