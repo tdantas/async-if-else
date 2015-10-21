@@ -14,3 +14,9 @@ async.waterfall([
 ], handler);
 
 ```
+
+
+#### Hey I found a BUG !
+Amazing ! PR are always welcome 
+
+Let's make the world a better place helping others :)
