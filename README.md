@@ -9,7 +9,8 @@ var require('async-if-else').extend(async);
 
 async.waterfall([
   async.constant({email: 'thiago@email.com', dogs: 2, money: 0, fun: 100 }),
-  async.if(emailExists, updateAccount).else(importFromLegacyByEmail)
+  async.if(emailExists, updateAccount).else(importFromLegacyByEmail),
+  sendEmail
 ], handler);
 
 ```
