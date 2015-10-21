@@ -9,7 +9,7 @@ var require('async-if-else').extend(async);
 
 async.waterfall([
   async.constant({name: 'thiago', password: 'secret'}),
-  async.if(validPayload, createAccount).else(createErrorPayload)
+  async.if(validatePayload, createAccount).else(createErrorPayload)
 ], handler);
 
 ```
