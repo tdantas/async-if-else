@@ -3,7 +3,7 @@ node famous async conditional capabilities
 
 easy way to create conditions on your async waterfall flow
 
-```
+```javascript
 var async = require('async');
 var require('async-if-else').extend(async);
 
