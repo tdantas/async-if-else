@@ -32,7 +32,7 @@ And the code is so much more readable, don't you agree?
 
 ```javascript
 var async = require('async');
-var require('async-if-else').extend(async);
+require('async-if-else').extend(async);
 
 async.waterfall([
   async.constant({email: 'thiago@email.com', dogs: 2, money: 0, fun: 100 }),
