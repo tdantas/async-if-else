@@ -1,6 +1,6 @@
 {
   "name": "async-if-else",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "'conditional if to async control flow'",
   "main": "index.js",
   "scripts": {
