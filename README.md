@@ -31,8 +31,7 @@ Using `async-if-else` you can have a conditional waterfall without the need of a
 And the code is so much more readable, don't you agree?
 
 ```javascript
-var async = require('async');
-require('async-if-else').extend(async);
+var async = require('async-if-else')(require('async'));
 
 async.waterfall([
   async.constant({email: 'thiago@email.com', dogs: 2, money: 0, fun: 100 }),
