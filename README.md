@@ -33,6 +33,26 @@ And the code is so much more readable, don't you agree?
 ```javascript
 var async = require('async-if-else')(require('async'));
 
+function emailExists(user, callback) {
+  user.find(user.email, function(err, dbUser){
+    if (err)
+      return callback(error);
+      
+     if(!dbUser)
+       return callback(null, false); // does not exist, predicate will be false
+       
+     callback(null, true);  
+  });
+}
+
+function updateAccount(user, callback) { 
+  user.update( ..., callback);
+}
+
+function importFromLegacyByEmail(user, callback) { 
+  remoteClient.get(user, callback);
+}
+
 async.waterfall([
   async.constant({email: 'thiago@email.com', dogs: 2, money: 0, fun: 100 }),
   async.if(emailExists, updateAccount).else(importFromLegacyByEmail),
