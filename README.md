@@ -63,7 +63,79 @@ async.waterfall([
   conditional.if(emailExists, auditLogging),
   publishToQueue
 ], handler);
+
 ```
+
+## API Signature
+
+* [`initializer`](#initializer) 
+* [`if`](#if)
+* [`else`](#else) 
+* [`ifNot`](#ifNot)
+* [`unless`](#unless)
+
+
+<a name="initializer" />
+### initializer
+To get start with async-if-else you need to provide an object. 
+
+```javascript
+ var conditionals = require('async-if-else')({});
+```
+
+```javascript
+ var async = require('async-if-else')(require('async'));
+```
+
+<a name="if" />
+### if
+**if** function receives the predicate and the expression.
+
+	async.if(predicateFn, expressionFn)
+
+* predicateFn must validate the argument received from waterfall chain  
+
+```javascript
+  function predicateFn(arg1 [, arg2 ...], callback) {}
+```
+
+callback signature is callback(error, truthyValue|falsyValue);   
+if you pass an error on first parameter the async.waterfall will skip below steps and goes directly to async.waterfall's callback function.
+
+* expressionFn will execute when predicate is thruthy.  
+
+```javascript
+  function expressionFn(arg1 [,arg2...], asyncWaterfallCallback)
+```
+
+<a name="else" />
+### else
+**else** receives only an elseExpressionFn
+
+	async.if(predicateFn, expressionFn).else(elseExpressionFn);
+
+* elseExpressionFn is executed when the if predicate is falsy or ifNot predicate is truthy.
+
+```javascript
+	function elseExpressionFn(arg1 [,arg2...], asyncWaterfallCallback)
+```
+
+<a name="ifNot" />
+### ifNot
+
+**ifNot** works as the opposite of **If** 
+receives the same arguments as *if*
+
+	async.ifNot(predicateFn, expressionFn)
+
+you could use with else as well
+	
+	async.ifNot(predicateFn, expressionFn).else(elseExpressionFn)
+
+<a name="unless" />
+### unless
+ just an alias to [`ifNot`](#ifNot).
+
 
 #### Hey, did you found an issue?
 
