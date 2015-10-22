@@ -2,6 +2,13 @@
   "name": "async-if-else",
   "version": "1.0.1",
   "description": "'conditional if to async control flow'",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tdantas/async-if-else.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tdantas/async-if-else/issues"
+  },
   "main": "index.js",
   "scripts": {
     "test": "node test.js"
