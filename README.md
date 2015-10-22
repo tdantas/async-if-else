@@ -43,8 +43,7 @@ async.waterfall([
 You can also omit the `else` and the function is only executed if the predicate is true.
 
 ```javascript
-var async = require('async');
-var require('async-if-else').extend(async);
+var async = require('async-if-else')(require('async'));
 
 async.waterfall([
   async.constant({email: 'thiago@email.com', dogs: 2, money: 0, fun: 100 }),
