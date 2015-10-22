@@ -173,6 +173,20 @@ function falsyValidation(payload, validated) {
   validated(false);
 }
 
+test('invalid predicate and sync statement', function(t) {
+  async.waterfall([
+    async.constant({name: 'thiago'}),
+    async.if(falsyValidation, createAccount),
+  ], verify);
+
+  function verify(err, result) {
+    t.notOk(err, 'there is no error');
+    t.equal(result.name, 'thiago', 'payload name is the same as initial');
+    t.notOk(result.id);
+    t.end();
+  }
+});
+
 test('must pass the result to next in chain after else statement', function(t){
   async.waterfall([
     async.constant({name: 'thiago'}),

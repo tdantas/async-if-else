@@ -41,5 +41,7 @@ function ifFn(predicate, ifStatement) {
 function nopStatement() {
   var args = Array.prototype.slice.call(arguments);
   var callback = args.pop();
-  callback.apply(null, args);
+  callback.apply(null, [null].concat(args));
 }
+
+
