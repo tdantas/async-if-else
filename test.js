@@ -251,8 +251,61 @@ test('predicated returns an error the async callback must be called with error',
   ], verify);
 
   function verify(err, result) {
-    t.ok(err, 'there is no error');
+    t.ok(err, 'error must be here');
     t.notOk(result, 'must not exist');
     t.end();
   }
+});
+
+test('ifNot is the same as unless', function(t) {
+  t.equal(async.ifNot, async.unless);
+  t.end();
+});
+
+['ifNot', 'unless'].forEach(function(method) {
+
+  function girls(payload, validated) {
+    validated(null, payload.gender === 'female');
+  }
+
+  function notAllowed(payload, callback) {
+    payload.allowed = false;
+    callback(null, payload);
+  }
+
+  function allowed(payload, callback) {
+    payload.allowed = true;
+    callback(null, payload);
+  }
+
+  test(method + ' works as expected', function(t) {
+    async.waterfall([
+      async.constant({name: 'thiago', gender: 'male'}),
+      async[method](girls, notAllowed).else(allowed)
+    ], verify);
+
+    function verify(err, result) {
+      t.notOk(err, 'there is no error');
+      t.equal(result.allowed, false,  'must be equals');
+      t.end();
+    }
+  });
+
+  function men(payload, validated) {
+    validated(null, payload.gender === 'male');
+  }
+
+  test(method + ' works as expected', function(t) {
+    async.waterfall([
+      async.constant({name: 'thiago', gender: 'male'}),
+      async[method](men, notAllowed).else(allowed)
+    ], verify);
+
+    function verify(err, result) {
+      t.notOk(err, 'there is no error');
+      t.equal(result.allowed, true,  'must be equals');
+      t.end();
+    }
+  });
+
 });

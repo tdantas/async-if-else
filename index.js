@@ -3,37 +3,48 @@ module.exports = extend;
 module.exports.extend = extend;
 
 function extend(async) {
-  async.if = ifFn;
+  async.if = builder(ifCheck);
+  async.ifNot = async.unless = builder(ifNotCheck);
   return async;
 }
 
-function ifFn(predicate, ifStatement) {
-  var elseStatement = nopStatement;
+function builder(predicateChecker) {
+  return function ifFn(predicate, ifStatement) {
+    var elseStatement = nopStatement;
 
-  function wrapper() {
-    var args = Array.prototype.slice.call(arguments);
-    var asyncCallback = args[args.length - 1 ];
-    var predicateArgs = args.slice(0, -1).concat(predicateCb);
+    function wrapper() {
+      var args = Array.prototype.slice.call(arguments);
+      var asyncCallback = args[args.length - 1 ];
+      var predicateArgs = args.slice(0, -1).concat(predicateCb);
 
-    predicate.apply(null, predicateArgs);
+      predicate.apply(null, predicateArgs);
 
-    function predicateCb(error, valid) {
-      if (error)
-        return asyncCallback(error);
+      function predicateCb(error, valid) {
+        if (error)
+          return asyncCallback(error);
 
-      if (valid)
-        ifStatement.apply(null, args);
-      else
-        elseStatement.apply(null, args);
+        if (predicateChecker(valid))
+          ifStatement.apply(null, args);
+        else
+          elseStatement.apply(null, args);
+      }
     }
-  }
-  
-  wrapper.else = function(statement) {
-    elseStatement = statement;
+ 
+    wrapper.else = function(statement) {
+      elseStatement = statement;
+      return wrapper;
+    };
+
     return wrapper;
   };
+}
 
-  return wrapper;
+function ifCheck(value) {
+  return value;
+}
+
+function ifNotCheck(value) {
+  return !value;
 }
 
 function nopStatement() {
