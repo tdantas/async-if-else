@@ -20,3 +20,9 @@ async.waterfall([
 Amazing ! PR are always welcome 
 
 Let's make the world a better place helping others :)
+
+
+
+
+# License
+[MIT](https://github.com/tdantas/async-if-else/blob/master/LICENSE)
