@@ -15,6 +15,22 @@ async.waterfall([
 
 ```
 
+what about if without else ?
+
+```javascript
+var async = require('async');
+var require('async-if-else').extend(async);
+
+async.waterfall([
+  async.constant({email: 'thiago@email.com', dogs: 2, money: 0, fun: 100 }),
+  async.if(emailExists, auditLogging),
+  publishToQueue
+], handler);
+
+```
+
+
+
 
 #### Hey, if you found a BUG !
 Amazing ! PR are always welcome 
