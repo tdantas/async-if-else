@@ -52,6 +52,19 @@ async.waterfall([
 ], handler);
 ```
 
+if you don't wanna change the async object, you can always do something like that
+
+```javascript
+var async = require('async');
+var conditional = require('async-if-else')({});
+
+async.waterfall([
+  async.constant({email: 'thiago@email.com', dogs: 2, money: 0, fun: 100 }),
+  conditional.if(emailExists, auditLogging),
+  publishToQueue
+], handler);
+```
+
 #### Hey, did you found an issue?
 
 The best way to get in touch is using the [GitHub](https://github.com/tdantas/async-if-else/issues).  
