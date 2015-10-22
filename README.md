@@ -153,7 +153,7 @@ if you pass an error on first parameter the async.waterfall will skip below step
 ### ifNot
 
 **ifNot** works as the opposite of **If** 
-receives the same arguments as *if*
+receives exactly the same arguments
 
 	async.ifNot(predicateFn, expressionFn)
 
