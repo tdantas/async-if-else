@@ -9,7 +9,7 @@ var async = require('async');
 
 async.waterfall([
   async.constant({email: 'thiago@email.com', dogs: 2, money: 0, fun: 100 }),
-  updateUserEmailOrGetLegacy
+  updateUserEmailOrGetLegacy,
   sendEmail
 ], handler);
 
@@ -52,7 +52,7 @@ async.waterfall([
 ], handler);
 ```
 
-if you don't wanna change the async object, you can always do something like that
+if you don't want to change the async object, you can always do something like that
 
 ```javascript
 var async = require('async');
@@ -67,7 +67,7 @@ async.waterfall([
 
 #### Hey, did you found an issue?
 
-The best way to get in touch is using the [GitHub](https://github.com/tdantas/async-if-else/issues).  
+The best way to get in touch is using the [GitHub issues section](https://github.com/tdantas/async-if-else/issues).  
 If you can't find someone with the problem you are facing open a [new issue](https://github.com/tdantas/async-if-else/issues/new) and let me know.  
 If you manage to find a solution for your problem, you can submit a new [PR](https://github.com/tdantas/async-if-else/pulls) :)
 
