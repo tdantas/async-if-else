@@ -1,6 +1,6 @@
 {
   "name": "async-if-else",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "'conditional if to async control flow'",
   "repository": {
     "type": "git",
