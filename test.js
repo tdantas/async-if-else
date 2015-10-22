@@ -3,11 +3,11 @@ var async = require('async');
 require('./').extend(async);
 
 function containsNameSync(payload, validated) {
-  validated(payload.name === 'thiago');
+  validated(null, payload.name === 'thiago');
 }
 
 function containsName(payload, validated) {
-  setImmediate(validated, payload.name === 'thiago');
+  setImmediate(validated, null, payload.name === 'thiago');
 }
 
 function createAccount(payload, callback) {
@@ -57,7 +57,7 @@ function notifyAdminASync(payload, callback){
 }
 
 function notContainsName(payload, validated) {
-  validated(payload.name === undefined);
+  validated(null, payload.name === undefined);
 }
 
 test('invalid predicate should call else sync statement', function(t){
@@ -91,7 +91,7 @@ test('invalid predicate should call else sync statement', function(t){
 });
 
 function validateAddressAndName(payload, country, validated) {
-  validated(payload.name === 'thiago' && country.city === 'lisbon');
+  validated(null, payload.name === 'thiago' && country.city === 'lisbon');
 }
 
 function createAccountWithAddress(payload, country, callback) {
@@ -115,7 +115,7 @@ test('different arities on if statement function', function(t){
 });
 
 function forceFail(payload, country, validated) {
-  validated(false);
+  validated(null, false);
 }
 
 function notifyAdminWithCity(payload, country, callback) {
@@ -140,7 +140,7 @@ test('different arities on else statement function', function(t){
 });
 
 function truthyValidation(payload, validated) {
-  setImmediate(validated, true);
+  setImmediate(validated, null, true);
 }
 
 function byPassOnly(payload, callback) {
@@ -170,7 +170,7 @@ test('must pass the result to next in chain after if statement', function(t){
 function nop(){}
 
 function falsyValidation(payload, validated) {
-  validated(false);
+  validated(null, false);
 }
 
 test('invalid predicate and sync statement', function(t) {
@@ -231,43 +231,6 @@ test('errors must be passed to async properly on else statements', function(t){
 
   function verify(err, result) {
     t.ok(err, 'error must exist');
-    t.end();
-  }
-});
-
-function changeValidation(payload, validated) {
-  validated(true, { name: payload.name, age: 30 });
-}
-
-test('predicate function could change the value passed to if statement', function(t){
-  async.waterfall([
-    async.constant({name: 'thiago'}),
-    async.if(changeValidation, createAccount),
-  ], verify);
-
-  function verify(err, result) {
-    t.notOk(err, 'there is no error');
-    t.equal(result.name, 'thiago', 'payload name is the same as initial');
-    t.ok(result.id, 'id must exist');
-    t.equal(result.age, 30, 'validate added new field'); 
-    t.end();
-  }
-});
-
-function changeFalseValidation(payload, validated) {
-  validated(false, { valid: 'changed' }); 
-}
-
-test('predicate function could change the value passed to else statement', function(t){
-  async.waterfall([
-    async.constant({name: 'thiago'}),
-    async.if(changeFalseValidation, nop).else(notifyAdminASync),
-  ], verify);
-
-  function verify(err, result) {
-    t.notOk(err, 'there is no error');
-    t.notOk(result.name, 'must not exist');
-    t.equal(result.valid, 'changed');
     t.end();
   }
 });

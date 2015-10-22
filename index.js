@@ -17,19 +17,14 @@ function ifFn(predicate, ifStatement) {
 
     predicate.apply(null, predicateArgs);
 
-    function predicateCb(valid, value) {
-      var applyArguments = args;
-
-      if (valid instanceof Error)
-        return asyncCallback(valid);
-
-      if (value)
-        applyArguments = [ value, asyncCallback ];
+    function predicateCb(error, valid) {
+      if (error)
+        return asyncCallback(error);
 
       if (valid)
-        ifStatement.apply(null, applyArguments);
+        ifStatement.apply(null, args);
       else
-        elseStatement.apply(null, applyArguments);
+        elseStatement.apply(null, args);
     }
   }
   
@@ -46,5 +41,3 @@ function nopStatement() {
   var callback = args.pop();
   callback.apply(null, [null].concat(args));
 }
-
-
