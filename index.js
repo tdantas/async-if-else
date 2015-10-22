@@ -20,6 +20,9 @@ function ifFn(predicate, ifStatement) {
     function predicateCb(valid, value) {
       var applyArguments = args;
 
+      if (valid instanceof Error)
+        return asyncCallback(valid);
+
       if (value)
         applyArguments = [ value, asyncCallback ];
 

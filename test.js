@@ -255,7 +255,7 @@ test('predicate function could change the value passed to if statement', functio
 });
 
 function changeFalseValidation(payload, validated) {
-  validated(false, { valid: false }); 
+  validated(false, { valid: 'changed' }); 
 }
 
 test('predicate function could change the value passed to else statement', function(t){
@@ -267,7 +267,29 @@ test('predicate function could change the value passed to else statement', funct
   function verify(err, result) {
     t.notOk(err, 'there is no error');
     t.notOk(result.name, 'must not exist');
-    t.notOk(result.valid, 'must be false');
+    t.equal(result.valid, 'changed');
+    t.end();
+  }
+});
+
+function validationThrowError(payload, validated) {
+  var error = new Error('validate-error');
+  validated(error);
+}
+
+test('predicated returns an error the async callback must be called with error', function(t) {
+  async.waterfall([
+    async.constant({name: 'thiago'}),
+    async.if(validationThrowError, createAccount).else(notifyAdminASync),
+    function willNotBeCalled(payload, callback) {
+      payload.next = true;
+      callback(null, payload);
+    }
+  ], verify);
+
+  function verify(err, result) {
+    t.ok(err, 'there is no error');
+    t.notOk(result, 'must not exist');
     t.end();
   }
 });
