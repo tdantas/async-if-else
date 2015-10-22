@@ -26,7 +26,7 @@ function ifFn(predicate, ifStatement) {
       if (valid)
         ifStatement.apply(null, applyArguments);
       else
-      elseStatement.apply(null, applyArguments);
+        elseStatement.apply(null, applyArguments);
     }
   }
   
