@@ -86,7 +86,7 @@ async.waterfall([
 
 ```
 
-## API Signature
+## API 
 
 * [`initializer`](#initializer) 
 * [`if`](#if)
@@ -94,6 +94,15 @@ async.waterfall([
 * [`ifNot`](#ifNot)
 * [`unless`](#unless)
 
+
+```javascript
+async.if()
+async.if().else()
+async.ifNot()
+async.ifNot().else()
+async.unless() 
+async.unless().else()
+```
 
 <a name="initializer" />
 ### initializer
