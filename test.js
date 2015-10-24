@@ -51,11 +51,6 @@ function notifyAdminSync(payload, callback){
   callback(null, payload);
 }
 
-function notifyAdminASync(payload, callback){
-  payload.notifyTo = 'admin@email.com';
-  setImmediate(callback, null, payload);
-}
-
 function notContainsName(payload, validated) {
   validated(null, payload.name === undefined);
 }
@@ -243,7 +238,7 @@ function validationThrowError(payload, validated) {
 test('predicated returns an error the async callback must be called with error', function(t) {
   async.waterfall([
     async.constant({name: 'thiago'}),
-    async.if(validationThrowError, createAccount).else(notifyAdminASync),
+    async.if(validationThrowError, createAccount),
     function willNotBeCalled(payload, callback) {
       payload.next = true;
       callback(null, payload);
