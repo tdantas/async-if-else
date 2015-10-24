@@ -1,5 +1,5 @@
 [![Code Climate](https://codeclimate.com/github/tdantas/async-if-else/badges/gpa.svg)](https://codeclimate.com/github/tdantas/async-if-else)
-
+[![Build Status](https://travis-ci.org/tdantas/async-if-else.svg?branch=master)](https://travis-ci.org/tdantas/async-if-else)
 # async-if-else
 
 This module adds if else conditional capabilities to [async](https://www.npmjs.com/package/async) module.
