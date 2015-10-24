@@ -302,5 +302,19 @@ test('ifNot is the same as unless', function(t) {
       t.end();
     }
   });
+});
 
+test('works with plain object', function(t){
+  var cond = require('./')({});
+
+  async.waterfall([
+    async.constant({ name: 'thiago' }),
+    cond.if(truthyValidation, createAccount),
+  ], verify);
+
+  function verify(err, result) {
+    t.notOk(err, 'error must not be here');
+    t.ok(result.id, 'must exist');
+    t.end();
+  }
 });
