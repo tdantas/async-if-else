@@ -11,7 +11,7 @@ function containsName(payload, validated) {
 }
 
 function createAccount(payload, callback) {
-  setTimeout(fn,10);
+  setImmediate(fn);
   function fn() {
     payload.id = Date.now();
     callback(null, payload);
@@ -315,6 +315,36 @@ test('works with plain object', function(t){
   function verify(err, result) {
     t.notOk(err, 'error must not be here');
     t.ok(result.id, 'must exist');
+    t.end();
+  }
+});
+
+test('predicate accepts TRUE boolean value', function(t){
+  var cond = require('./')({});
+
+  async.waterfall([
+    async.constant({ name: 'thiago' }),
+    cond.if(true, createAccount),
+  ], verify);
+
+  function verify(err, result) {
+    t.notOk(err, 'error must not be here');
+    t.ok(result.id, 'must exist');
+    t.end();
+  }
+});
+
+test('predicate accepts FALSE boolean value', function(t){
+  var cond = require('./')({});
+
+  async.waterfall([
+    async.constant({ name: 'thiago' }),
+    cond.if(false, createAccount),
+  ], verify);
+
+  function verify(err, result) {
+    t.notOk(err, 'error must not be here');
+    t.notOk(result.id, 'must not exist');
     t.end();
   }
 });

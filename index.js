@@ -17,6 +17,16 @@ function builder(predicateChecker) {
       var asyncCallback = args[args.length - 1 ];
       var predicateArgs = args.slice(0, -1).concat(predicateCb);
 
+      if (isBoolean(predicate)) {
+        const predicateValue = predicate;
+
+        predicate = function booleanValue() {
+         const args = Array.prototype.slice.call(arguments);
+         const cb = args.pop();
+         cb(null, predicateValue);
+        }
+      }
+
       predicate.apply(null, predicateArgs);
 
       function predicateCb(error, valid) {
@@ -52,3 +62,9 @@ function nopStatement() {
   var callback = args.pop();
   callback.apply(null, [null].concat(args));
 }
+
+
+function isBoolean(value) {
+  return value === true || value === false || Object.toString.call(value) === '[object Boolean]';
+}
+
