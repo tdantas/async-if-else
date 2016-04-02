@@ -1,6 +1,10 @@
 [![Code Climate](https://codeclimate.com/github/tdantas/async-if-else/badges/gpa.svg)](https://codeclimate.com/github/tdantas/async-if-else)
-[![Build Status](https://travis-ci.org/tdantas/async-if-else.svg?branch=master)](https://travis-ci.org/tdantas/async-if-else)  
+[![Build Status](https://travis-ci.org/tdantas/async-if-else.svg?branch=master)](https://travis-ci.org/tdantas/async-if-else)
+[![Known Vulnerabilities](https://snyk.io/test/npm/name/badge.svg)](https://snyk.io/test/npm/name)  
+
+
 [![NPM](https://nodei.co/npm/async-if-else.png?downloads=true)](https://nodei.co/npm/async-if-else/)
+
 
 # Install
 
