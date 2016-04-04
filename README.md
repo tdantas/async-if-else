@@ -1,4 +1,5 @@
 [![Code Climate](https://codeclimate.com/github/tdantas/async-if-else/badges/gpa.svg)](https://codeclimate.com/github/tdantas/async-if-else)
+[![Issue Count](https://codeclimate.com/github/tdantas/async-if-else/badges/issue_count.svg)](https://codeclimate.com/github/tdantas/async-if-else)
 [![Build Status](https://travis-ci.org/tdantas/async-if-else.svg?branch=master)](https://travis-ci.org/tdantas/async-if-else)
 [![Known Vulnerabilities](https://snyk.io/test/npm/async-if-else/badge.svg)](https://snyk.io/test/npm/async-if-else)
 
