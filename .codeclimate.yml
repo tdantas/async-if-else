@@ -6,6 +6,8 @@ engines:
     config:
       languages:
       - javascript
+  requiresafe:
+    enabled: true
 
 exclude_paths:
 - test.js
