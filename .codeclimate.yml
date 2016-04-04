@@ -6,6 +6,8 @@ engines:
     config:
       languages:
       - javascript
+  fixme:
+    enabled: true
 
 exclude_paths:
 - test.js
