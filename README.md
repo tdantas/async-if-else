@@ -177,7 +177,7 @@ you could use with else as well
 
 <a name="unless" />
 ### unless
- just an alias to [`ifNot`](#ifNot).
+ alias to [`ifNot`](#ifNot).
 
 
 #### Hey, did you found an issue?
